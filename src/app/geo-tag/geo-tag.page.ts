@@ -24,22 +24,24 @@ export class GeoTagPage implements OnInit {
 
   map: any;
 
+  coordinates: Geocoords;
+
   constructor(private geolocation: Geolocation, public geocoordsService: GeoCoordsService) {}
 
   ngOnInit() {
 
-    let coordinates = this.geocoordsService.getCurrentCoordinates();
-    console.log('Coordinates from Geotag >>> ' + coordinates.latitude);
-    console.log('Coordinates from Geotag >>> ' + coordinates.longitude);
+    this.coordinates = this.geocoordsService.getCurrentCoordinates();
+    console.log('Coordinates from Geotag >>> ' + this.coordinates.latitude);
+    console.log('Coordinates from Geotag >>> ' + this.coordinates.longitude);
 
-    this.map = L.map('mapid').setView([coordinates.latitude, coordinates.longitude], 15);
+    this.map = L.map('mapid').setView([this.coordinates.latitude, this.coordinates.longitude], 15);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
-    L.marker([coordinates.latitude, coordinates.longitude])
-    .bindPopup('Latitude: ' + coordinates.latitude + ', Longitude: ' + coordinates.longitude)
+    L.marker([this.coordinates.latitude, this.coordinates.longitude])
+    .bindPopup('Latitude: ' + this.coordinates.latitude + ', Longitude: ' + this.coordinates.longitude)
     .addTo(this.map);
 
   }

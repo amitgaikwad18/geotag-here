@@ -27,7 +27,7 @@ export class HomePage implements OnInit {
     this.geolocation.getCurrentPosition()
     .then((resp) => {
       console.log('This is initialization');
-      this.coordinates = {latitude: resp.coords.latitude, longitude: resp.coords.longitude};
+      //this.coordinates = {latitude: resp.coords.latitude, longitude: resp.coords.longitude};
       this.geocoordsservice.setCurrentCoordinates(resp.coords.latitude, resp.coords.longitude);
     })
     .catch((error) => {
@@ -40,7 +40,7 @@ export class HomePage implements OnInit {
       this.geocoordsservice.setCurrentCoordinates(resp.coords.latitude, resp.coords.longitude);
     });
 
-    //this.coordinates = this.geocoordsservice.getCurrentCoordinates();
+    this.coordinates = this.geocoordsservice.getCurrentCoordinates();
     // console.log(coordinates)
   }
 
