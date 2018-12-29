@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import * as L from 'leaflet';
 
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+
+import { GeoCoordsService } from '../services/geocoords.service';
+import { Geocoords } from '../model/geocoords.model';
+
 // declare const H: any;
 
 @Component({
@@ -19,40 +24,31 @@ export class GeoTagPage implements OnInit {
 
   map: any;
 
-  constructor() {}
+  constructor(private geolocation: Geolocation, public geocoordsService: GeoCoordsService) {}
 
   ngOnInit() {
 
-    // this.geolocation.getCurrentPosition().then((resp) => {
-    //   this.lat = resp.coords.latitude;
-    //   this.lng = resp.coords.longitude;
-    //  }).catch((error) => {
-    //    console.log('Error getting location', error);
-    //  });
+    let coordinates = this.geocoordsService.getCurrentCoordinates();
+    console.log('Coordinates from Geotag >>> ' + coordinates.latitude);
+    console.log('Coordinates from Geotag >>> ' + coordinates.longitude);
 
-    //  let watch = this.geolocation.watchPosition();
-    //  watch.subscribe((data) => {
-    //   // data can be a set of coordinates, or an error (if an error occurred).
-    //   // data.coords.latitude
-    //   // data.coords.longitude
-    //  });
-
-    // let Latlng = L.latLng(19.07, 72.87);
-
-    this.map = L.map('mapid').setView([19.07, 72.87], 15);
+    this.map = L.map('mapid').setView([coordinates.latitude, coordinates.longitude], 15);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
-    // L.marker(Latlng).addTo(this.map);
+    L.marker([coordinates.latitude, coordinates.longitude])
+    .bindPopup('Latitude: ' + coordinates.latitude + ', Longitude: ' + coordinates.longitude)
+    .addTo(this.map);
+
   }
 
-  addMarker() {
+  recenter() {
 
-    let Latlng = L.latLng(19.07, 72.87);
+    let coordinates = this.geocoordsService.getCurrentCoordinates();
 
-    L.marker(Latlng).addTo(this.map);
+    this.map.flyTo([coordinates.latitude, coordinates.longitude], 15);
 
   }
 }
