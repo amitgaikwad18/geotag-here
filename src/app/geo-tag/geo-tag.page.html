@@ -6,15 +6,15 @@
   </ion-toolbar>
 </ion-header>
 
-<div>
-  <h2>Current Position</h2>
-  <ion-label>At : {{ coordinates.latitude }} / {{ coordinates.longitude }}</ion-label>
-</div>
 <ion-content>
   <!-- <div style="height: 480px" id="mapContainer"></div> -->
   <div style="height: 450px" id="mapid"></div>
   <div align="center">
     <ion-button primary (click)="recenter()">Recenter</ion-button>
-    <!-- <ion-icon name="locate" style="width: 50px; height: 50px;" ></ion-icon> -->
+    <ion-button primary (click)="dropMarker()">PinIt</ion-button>
+    <!-- <div>
+    <ion-label>lat: {{ coordinates.latitude.toPrecision(4) }}</ion-label>
+    <ion-label>lag: {{ coordinates.longitude.toPrecision(4) }}</ion-label>
+  </div> -->
   </div>
 </ion-content>
