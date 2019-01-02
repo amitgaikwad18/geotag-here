@@ -1,1 +1,1 @@
-web: npm run ionic-build && npm ionic-serve
+web: npm run ionic-build && npm start
