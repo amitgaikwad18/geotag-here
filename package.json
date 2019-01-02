@@ -10,8 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
+    "ionic-build": "ionic-app-scripts build",
+    "ionic-serve": "ionic-app-scripts serve"
   },
   "private": true,
   "dependencies": {
