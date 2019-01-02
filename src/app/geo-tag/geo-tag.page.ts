@@ -62,7 +62,7 @@ export class GeoTagPage implements OnInit {
 
   dropMarker() {
 
-    let latlngs = [[this.coordinates.latitude, this.coordinates.longitude]];
+    let latlngs = [new L.LatLng(this.coordinates.latitude, this.coordinates.longitude)];
 
     let crntcoords = this.geocoordsService.getCurrentCoordinates();
 
@@ -72,7 +72,7 @@ export class GeoTagPage implements OnInit {
     L.marker([crntcoords.latitude, crntcoords.longitude])
     .addTo(this.map);
 
-    latlngs.push([crntcoords.latitude, crntcoords.longitude]);
+    latlngs.push(new L.LatLng(crntcoords.latitude, crntcoords.longitude));
 
     console.log(latlngs);
 
