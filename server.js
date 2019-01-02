@@ -17,7 +17,8 @@ app.use(function(req, res, next) {
 });
  
 app.use(express.static('www'));
-app.set('port', process.env.PORT || 5000);
-app.listen(app.get('port'), function () {
-  console.log('Express server listening on port ' + app.get('port'));
+// app.set('port', process.env.PORT || 5000);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, function () {
+  console.log('Express server listening on port ' + PORT);
 });
