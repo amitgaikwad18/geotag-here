@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
  
 app.use(express.static(path.resolve(__dirname, "www")));
 // app.set('port', process.env.PORT || 5000);
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, '0.0.0.0', function () {
+const port = process.env.PORT || 5000;
+app.listen(port ,function () {
   console.log('Express server listening on port ' + PORT);
 });
