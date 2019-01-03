@@ -28,6 +28,8 @@ export class GeoTagPage implements OnInit {
 
   coordinates: Geocoords;
 
+  polygonLatLngs = [];
+
   constructor(private geolocation: Geolocation, public geocoordsService: GeoCoordsService) {}
 
   ngOnInit() {
@@ -62,41 +64,61 @@ export class GeoTagPage implements OnInit {
 
   dropMarker() {
 
-    // let currentLat: any;
-    // let currrentLng: any;
+    let currentLat: any;
+    let currrentLng: any;
 
-    // let startingLat = this.coordinates.latitude;
-    // let starttingLng = this.coordinates.longitude;
+    const startingLat = this.coordinates.latitude;
+    const starttingLng = this.coordinates.longitude;
 
-    // let latlngs = [new L.LatLng(startingLat, starttingLng)];
+    const latlngs = [new L.LatLng(startingLat, starttingLng)];
 
-    // let crntcoords = this.geocoordsService.getCurrentCoordinates();
+    this.polygonLatLngs.push(latlngs);
 
-    // currentLat = crntcoords.latitude;
-    // currrentLng = crntcoords.longitude;
+    const crntcoords = this.geocoordsService.getCurrentCoordinates();
 
-    // if (startingLat !== currentLat) {
-    //   currentLat = startingLat;
-    // }
+    currentLat = crntcoords.latitude;
+    currrentLng = crntcoords.longitude;
 
-    // console.log('Coordinates from Geotag >>> ' + crntcoords.latitude.toPrecision(4));
-    // console.log('Coordinates from Geotag >>> ' + crntcoords.longitude.toPrecision(4));
+    console.log('Coordinates from Geotag >>> ' + crntcoords.latitude.toPrecision(4));
+    console.log('Coordinates from Geotag >>> ' + crntcoords.longitude.toPrecision(4));
 
-    // L.marker([crntcoords.latitude, crntcoords.longitude])
-    // .addTo(this.map);
+    L.marker([crntcoords.latitude, crntcoords.longitude])
+    .addTo(this.map);
 
-    // latlngs.push(new L.LatLng(crntcoords.latitude, crntcoords.longitude));
-
-    // console.log(latlngs);
+    this.polygonLatLngs.push(new L.LatLng(crntcoords.latitude, crntcoords.longitude));
 
     // // let polylines = L.polyline(latlngs, {color: 'red'}).addTo(this.map);
     // let polygon = L.polygon(latlngs, {color: 'red'}).addTo(this.map);
 
-    let latlngs = [new L.LatLng(37, -109.05)];
-      latlngs.push(new L.LatLng(41, -109.03));
-      latlngs.push(new L.LatLng(41, -109.03));
-      latlngs.push(new L.LatLng(41, -109.03));
-    let polygon = L.polygon(latlngs, {color: 'red'}).addTo(this.map);
+    // let latlngs = [new L.LatLng(37.23, -109.05)];
+    //   latlngs.push(new L.LatLng(41.45, -109.03));
+    //   latlngs.push(new L.LatLng(41.47, -102.0));
+    //   latlngs.push(new L.LatLng(37.54, -102.04));
 
+    //   L.marker(new L.LatLng(37, -109.05))
+    //   .bindPopup('37, -109.05')
+    //   .addTo(this.map);
+
+    //   L.marker(new L.LatLng(41, -109.03))
+    //   .bindPopup('41, -109.03')
+    //   .addTo(this.map);
+
+    //   L.marker(new L.LatLng(41, -102.0))
+    //   .bindPopup('41, -102.0')
+    //   .addTo(this.map);
+
+    //   L.marker(new L.LatLng(37, -102.04))
+    //   .bindPopup('37, -102.04')
+    //   .addTo(this.map);
+
+    //let polygon = L.polygon(latlngs, {color: 'red'}).addTo(this.map);
+
+  }
+
+  drawPolygon() {
+
+    let polygon = L.polygon(this.polygonLatLngs, {color: 'red'}).addTo(this.map);
+
+    this.map.fitBounds(polygon.getBounds());
   }
 }
