@@ -62,24 +62,41 @@ export class GeoTagPage implements OnInit {
 
   dropMarker() {
 
-    let latlngs = [new L.LatLng(this.coordinates.latitude, this.coordinates.longitude)];
+    // let currentLat: any;
+    // let currrentLng: any;
 
-    let crntcoords = this.geocoordsService.getCurrentCoordinates();
+    // let startingLat = this.coordinates.latitude;
+    // let starttingLng = this.coordinates.longitude;
 
-    console.log('Coordinates from Geotag >>> ' + crntcoords.latitude.toPrecision(4));
-    console.log('Coordinates from Geotag >>> ' + crntcoords.longitude.toPrecision(4));
+    // let latlngs = [new L.LatLng(startingLat, starttingLng)];
 
-    L.marker([crntcoords.latitude, crntcoords.longitude])
-    .addTo(this.map);
+    // let crntcoords = this.geocoordsService.getCurrentCoordinates();
 
-    latlngs.push(new L.LatLng(crntcoords.latitude, crntcoords.longitude));
+    // currentLat = crntcoords.latitude;
+    // currrentLng = crntcoords.longitude;
 
-    console.log(latlngs);
+    // if (startingLat !== currentLat) {
+    //   currentLat = startingLat;
+    // }
 
-    // let polylines = L.polyline(latlngs, {color: 'red'}).addTo(this.map);
+    // console.log('Coordinates from Geotag >>> ' + crntcoords.latitude.toPrecision(4));
+    // console.log('Coordinates from Geotag >>> ' + crntcoords.longitude.toPrecision(4));
+
+    // L.marker([crntcoords.latitude, crntcoords.longitude])
+    // .addTo(this.map);
+
+    // latlngs.push(new L.LatLng(crntcoords.latitude, crntcoords.longitude));
+
+    // console.log(latlngs);
+
+    // // let polylines = L.polyline(latlngs, {color: 'red'}).addTo(this.map);
+    // let polygon = L.polygon(latlngs, {color: 'red'}).addTo(this.map);
+
+    let latlngs = [new L.LatLng(37, -109.05)];
+      latlngs.push(new L.LatLng(41, -109.03));
+      latlngs.push(new L.LatLng(41, -109.03));
+      latlngs.push(new L.LatLng(41, -109.03));
     let polygon = L.polygon(latlngs, {color: 'red'}).addTo(this.map);
-
-
 
   }
 }
