@@ -19,31 +19,50 @@ export class HomePage implements OnInit {
   // lat: any;
   // lng: any;
 
-  coordinates: Geocoords;
+  public coordinates: Geocoords;
   // coordsList: Geocoords[] = [];
+
+  public showmycoords = false;
 
   constructor(private geolocation: Geolocation, public geocoordsservice: GeoCoordsService) {}
 
   ngOnInit() {
 
-    this.geolocation.getCurrentPosition()
-    .then((resp) => {
-      console.log('This is initialization');
-      // this.coordinates = {latitude: resp.coords.latitude, longitude: resp.coords.longitude};
-      this.geocoordsservice.setCurrentCoordinates(resp.coords.latitude, resp.coords.longitude);
-    })
-    .catch((error) => {
-      console.log('Error getting position ', error);
-    });
+    // this.geolocation.getCurrentPosition()
+    // .then((resp) => {
+    //   console.log('This is initialization');
+    //   // this.coordinates = {latitude: resp.coords.latitude, longitude: resp.coords.longitude};
+    //   this.geocoordsservice.setCurrentCoordinates(resp.coords.latitude, resp.coords.longitude);
+    // })
+    // .catch((error) => {
+    //   console.log('Error getting position ', error);
+    // });
 
-    let watch = this.geolocation.watchPosition()
-    .subscribe((resp) => {
-      console.log('This is Watch');
-      this.geocoordsservice.setCurrentCoordinates(resp.coords.latitude, resp.coords.longitude);
-    });
+    // let watch = this.geolocation.watchPosition()
+    // .subscribe((resp) => {
+    //   console.log('This is Watch');
+    //   this.geocoordsservice.setCurrentCoordinates(resp.coords.latitude, resp.coords.longitude);
+    // });
+
+    // let watch = this.geolocation.watchPosition()
+    // .subscribe((resp) => {
+    //   console.log('This is Watch');
+    //   this.geocoordsservice.setCurrentCoordinates(resp.coords.latitude, resp.coords.longitude);
+    // });
+
+    // this.coordinates = this.geocoordsservice.getCurrentCoordinates();
+    // console.log(this.coordinates.latitude);
+    // console.log(this.coordinates.longitude);
+  }
+
+  showMyCoordinates() {
+
+    this.showmycoords = !this.showmycoords;
 
     this.coordinates = this.geocoordsservice.getCurrentCoordinates();
-    // console.log(coordinates)
+    console.log(this.coordinates.latitude);
+    console.log(this.coordinates.longitude);
+
   }
 
 

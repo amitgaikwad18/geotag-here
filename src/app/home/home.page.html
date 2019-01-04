@@ -6,13 +6,15 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="coordinates">
-    <h2>Current Position</h2>
-    <div>
-      <ion-label>Current Lat: {{ coordinates.latitude }}</ion-label>
-    </div>
-    <div>
-      <ion-label>Current Lng: {{ coordinates.longitude }}</ion-label>
-    </div>
+<ion-content>
+    <button ion-button full (click)="showMyCoordinates()">Where am i?</button>
+    <ion-card *ngIf="showmycoords">
+      <img/>
+      <ion-card-content>
+        <ion-card-title>
+          You are at
+        </ion-card-title>
+        <p>Latitude: {{ coordinates.latitude }} - Longitude: {{ coordinates.latitude }}</p>
+      </ion-card-content>
+    </ion-card>
 </ion-content>
-<p class="info-text" *ngIf="!coordinates">No Coordinates</p>

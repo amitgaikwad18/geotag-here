@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as L from 'leaflet';
-import * as LDraw from 'leaflet-draw';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { GeoCoordsService } from '../services/geocoords.service';
 import { Geocoords } from '../model/geocoords.model';
-import { stringify } from '@angular/compiler/src/util';
 
 // declare const H: any;
 
@@ -100,8 +98,8 @@ export class GeoTagPage implements OnInit {
     let polygon = L.polygon(this.polygonLatLngs, {color: 'red'}).addTo(this.map);
 
     this.map.fitBounds(polygon.getBounds());
-  }
 
+  }
 
   reset() {
 
