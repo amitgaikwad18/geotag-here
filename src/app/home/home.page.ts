@@ -1,7 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-
+import { Component, OnInit, OnDestroy, NgModule } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
 
 import { GeoCoordsService } from '../services/geocoords.service';
 import { Geocoords } from '../model/geocoords.model';

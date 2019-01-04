@@ -7,16 +7,18 @@
 </ion-header>
 
 <ion-content>
+  <ion-button primary full (click)="showMyCoordinates()">Where am i?</ion-button>
   <div align="center">
-      <ion-button (click)="showMyCoordinates()" color="secondary" full>Where am i?</ion-button>
       <ion-card *ngIf="showmycoords">
         <img/>
         <ion-card-content>
           <ion-card-title>
             You are at
           </ion-card-title>
-          <p>Latitude: {{ coordinates.latitude.toPrecision(4) }} - Longitude: {{ coordinates.longitude.toPrecision(4) }}</p>
+          <p>Latitude: {{ coordinates.latitude }}</p>
+          <p>Longitude: {{ coordinates.longitude }}</p>
         </ion-card-content>
       </ion-card>
   </div>
+
 </ion-content>
