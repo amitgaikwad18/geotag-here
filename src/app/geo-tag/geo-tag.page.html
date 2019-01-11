@@ -8,17 +8,21 @@
 
 <ion-content>
   <!-- <div style="height: 480px" id="mapContainer"></div> -->
-  <div style="height: 75%" id="mapid"></div>
-  <div align="center">
+  <div style="height: 100%" id="mapid">
+    <div class="leaflet-center leaflet-bottom">
+      <ion-button (click)="recenter()" color="secondary">
+        <ion-icon name="locate"></ion-icon>
+      </ion-button>
+      <!-- <ion-button primary (click)="recenter()">Recenter</ion-button> -->
+    </div>
+  </div>
+  
+  <!-- <div align="center">
     <ion-button primary (click)="recenter()">Recenter</ion-button>
     <ion-button primary (click)="dropMarker()">PinIt</ion-button>
     <ion-button primary (click)="drawPolygon()">Show Poly</ion-button>
-    <!-- <div>
-    <ion-label>lat: {{ coordinates.latitude.toPrecision(4) }}</ion-label>
-    <ion-label>lag: {{ coordinates.longitude.toPrecision(4) }}</ion-label>
-  </div> -->
   </div>
   <div align="center">
     <ion-button danger (click)="reset()">Reset</ion-button>
-  </div>
+  </div> -->
 </ion-content>

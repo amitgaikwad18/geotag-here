@@ -51,11 +51,11 @@ export class GeoTagPage implements OnInit {
 
     this.polygonLatLngs.push(L.latLng(this.coordinates.latitude, this.coordinates.longitude));
 
-    const helloPopup = L.popup().setContent('Hello World!');
+    // const helloPopup = L.popup().setContent('Hello World!');
 
-    L.easyButton('fa-globe', function() {
-      helloPopup.setLatLng(this.map.getCenter()).openOn(this.map);
-    }).addTo( this.map );
+    // L.easyButton('fa-globe', function() {
+    //   helloPopup.setLatLng(this.map.getCenter()).openOn(this.map);
+    // }).addTo( this.map );
 
     // this.map.flyTo([this.coordinates.latitude, this.coordinates.longitude], 15);
   }
