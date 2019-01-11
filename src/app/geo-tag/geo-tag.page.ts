@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
 import * as L from 'leaflet';
+import * as mapboxgl from 'mapbox-gl';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { GeoCoordsService } from '../services/geocoords.service';
 import { Geocoords } from '../model/geocoords.model';
+import { environment } from '../../environments/environment';
 
 // declare const H: any;
 
@@ -28,7 +30,9 @@ export class GeoTagPage implements OnInit {
 
   polygonLatLngs = [];
 
-  constructor(private geolocation: Geolocation, public geocoordsService: GeoCoordsService) {}
+  constructor(private geolocation: Geolocation, public geocoordsService: GeoCoordsService) {
+    mapboxgl.accessToken = environment.mapbox.accessToken;
+  }
 
   ngOnInit() {
 
@@ -39,17 +43,26 @@ export class GeoTagPage implements OnInit {
     this.lat = parseInt(this.coordinates.latitude.toPrecision(4), 10);
     this.lng = parseInt(this.coordinates.longitude.toPrecision(4), 10);
 
-    this.map = L.map('mapid').setView([this.coordinates.latitude, this.coordinates.longitude], 15);
+   // mapboxgl.accessToken = 'pk.eyJ1IjoiYW1pdGdhaWt3YWQ4NSIsImEiOiJjanFzMDYwbHEwaHd4NDJsanIzZ2hqbDFyIn0.H4c917HglXZhvgSdrTjhZA';
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.map);
+    const map = new mapboxgl.Map({
+      container: 'mapid', // container id
+      style: 'mapbox://styles/mapbox/streets-v9', // stylesheet location
+      center: [this.lat, this.lng], // starting position [lng, lat]
+      zoom: 9 // starting zoom
+    });
 
-    L.marker([this.coordinates.latitude, this.coordinates.longitude])
-    .bindPopup('Latitude: ' + this.coordinates.latitude + ', Longitude: ' + this.coordinates.longitude)
-    .addTo(this.map);
+    // this.map = L.map('mapid').setView([this.coordinates.latitude, this.coordinates.longitude], 15);
 
-    this.polygonLatLngs.push(L.latLng(this.coordinates.latitude, this.coordinates.longitude));
+    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    // attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    // }).addTo(this.map);
+
+    // L.marker([this.coordinates.latitude, this.coordinates.longitude])
+    // .bindPopup('Latitude: ' + this.coordinates.latitude + ', Longitude: ' + this.coordinates.longitude)
+    // .addTo(this.map);
+
+    // this.polygonLatLngs.push(L.latLng(this.coordinates.latitude, this.coordinates.longitude));
 
     // const helloPopup = L.popup().setContent('Hello World!');
 
