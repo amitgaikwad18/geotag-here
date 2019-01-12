@@ -45,12 +45,24 @@ export class GeoTagPage implements OnInit {
 
    // mapboxgl.accessToken = 'pk.eyJ1IjoiYW1pdGdhaWt3YWQ4NSIsImEiOiJjanFzMDYwbHEwaHd4NDJsanIzZ2hqbDFyIn0.H4c917HglXZhvgSdrTjhZA';
 
-    const map = new mapboxgl.Map({
+     let lnglat = new mapboxgl.LngLat(this.coordinates.longitude, this.coordinates.latitude);
+
+    this.map = new mapboxgl.Map({
       container: 'mapid', // container id
       style: 'mapbox://styles/mapbox/streets-v9', // stylesheet location
-      center: [this.lat, this.lng], // starting position [lng, lat]
-      zoom: 9 // starting zoom
+      center: lnglat, // starting position [lng, lat]
+      zoom: 15 // starting zoom
     });
+
+    this.map.addControl(new mapboxgl.NavigationControl());
+
+    this.map.addControl(new mapboxgl.GeolocateControl({
+      positionOptions: {
+          enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    }));
+
 
     // this.map = L.map('mapid').setView([this.coordinates.latitude, this.coordinates.longitude], 15);
 

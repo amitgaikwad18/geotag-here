@@ -20,6 +20,8 @@ app.use(function(req, res, next) {
 app.use(express.static(path.resolve(__dirname, "www")));
 // app.set('port', process.env.PORT || 5000);
 const port = process.env.PORT || 5000;
+
+// http.createServer(app , function() {}).listen(port);
 app.listen(port ,function () {
   console.log("Express server listening on port " + port);
 });
