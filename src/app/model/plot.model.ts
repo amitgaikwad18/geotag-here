@@ -1,4 +1,4 @@
 export interface Plot {
-    id: number;
+    id: string;
     plotName: string;
 }

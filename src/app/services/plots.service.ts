@@ -26,7 +26,7 @@ export class PlotsService {
     }
 
     addPlot(plotName: string) {
-        const plot: Plot = {id: Math.floor((Math.random() * 6) + 1), plotName: plotName};
+        const plot: Plot = {id: null, plotName: plotName};
         this.httpClient.post<{message: string}>('http://localhost:5000/api/plots', plot)
         .subscribe((responseData) => {
             console.log(responseData.message);

@@ -11,15 +11,20 @@ export class PlotsCreateComponent implements OnInit {
 
   constructor(public plotsService: PlotsService) { }
 
+  plotName: string;
+
   ngOnInit() {
   }
 
   onAddPlot(form: NgForm) {
 
-    if (form.invalid) {
-      return;
-    }
-    this.plotsService.addPlot(form.value.plotName);
+    // if (form.invalid) {
+    //   return;
+    // }
+
+    console.log(this.plotName);
+    this.plotsService.addPlot(this.plotName);
+    form.resetForm();
   }
 
 }

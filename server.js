@@ -4,6 +4,13 @@ var morgan = require("morgan");
 var bodyParser = require("body-parser");    
 var cors = require("cors");
 var path = require("path");
+
+var http = require("http");
+const debug = require("debug")("node-angular");
+
+const mongoose = require("mongoose");
+
+const Plot = require("./plot");
  
 app.use(morgan("dev"));                                        
 app.use(bodyParser.urlencoded({"extended":"true"}));            
@@ -17,12 +24,22 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.post('/api/plots', (req, res, next) => {
+mongoose.connect('mongodb+srv://meanuser:7v2XbhqPsWewtf9c@cluster0-wkekd.mongodb.net/test?retryWrites=true')
+.then(() => {
+  console.log('Connected to MongoDB');
+})
+.catch(() => {
+  console.log('Connection Failed to MongoDB');
+});
 
+app.post('/api/plots', (req, res, next) => {
+  const plot = new Plot({
+    plotName: req.body.title
+  });
+  console.log(plot);
   res.status(201).json({
     message: 'Plot Added Successfully'
   });
-
 });
 
 app.get('/api/plots', (req, res, next) => {
@@ -43,12 +60,43 @@ app.get('/api/plots', (req, res, next) => {
     plots: plots
   });
 }); 
+
+const onError = error => {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+  const bind = typeof port === "string" ? "pipe " + port : "port " + port;
+  switch (error.code) {
+    case "EACCES":
+      console.error(bind + " requires elevated privileges");
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(bind + " is already in use");
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+};
+
+const onListening = () => {
+  const addr = server.address();
+  const bind = typeof port === "string" ? "pipe " + port : "port " + port;
+  debug("Listening on " + bind);
+};
+
  
 app.use(express.static(path.resolve(__dirname, "www")));
 // app.set('port', process.env.PORT || 5000);
 const port = process.env.PORT || 5000;
 
-// http.createServer(app , function() {}).listen(port);
-app.listen(port ,function () {
-  console.log("Express server listening on port " + port);
-});
+const server = http.createServer(app);
+server.on("error", onError);
+server.on("listening", onListening);
+server.listen(port);
+
+// // http.createServer(app , function() {}).listen(port);
+// app.listen(port ,function () {
+//   console.log("Express server listening on port " + port);
+// });

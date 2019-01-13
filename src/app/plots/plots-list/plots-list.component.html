@@ -1,4 +1,4 @@
-<ion-list *ngIf="plots.length > 0">
+<!-- <ion-list *ngIf="plots.length > 0">
   <ion-card *ngFor="let plot of plots">
     <ion-card-header>
       {{ plot.plotName }}
@@ -8,5 +8,16 @@
       <ion-button><ion-icon name="map"></ion-icon>Show Plots</ion-button>
     </ion-buttons>
   </ion-card>
+</ion-list> -->
+<ion-list *ngIf="plots.length > 0">
+  <ion-item-sliding *ngFor="let plot of plots">
+    <ion-item>
+      <ion-label>{{ plot.plotName }}</ion-label>
+    </ion-item>
+    <ion-item-options>
+      <ion-button color="primary"><ion-icon name="add"></ion-icon>Add Plot</ion-button>
+      <ion-button color="secondary"><ion-icon name="map"></ion-icon>Show Plots</ion-button>
+    </ion-item-options>
+  </ion-item-sliding>
 </ion-list>
 <p class="info-text" *ngIf="plots.length <= 0">No Plots Added Yet!</p>
