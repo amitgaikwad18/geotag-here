@@ -8,7 +8,11 @@ import {  SQLite } from '@ionic-native/sqlite/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
+// import { PlotsListComponent } from './plots/plots-list/plots-list.component';
+// import { PlotsCreateComponent } from './plots/plots-create/plots-create.component';
+import { PlotsCreateModule } from '../app/plots/plots-create/plots-create.component.module';
+import { PlotsListModule } from '../app/plots/plots-list/plots-list.component.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,6 +21,9 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    PlotsCreateModule,
+    PlotsListModule,
+    HttpClientModule,
   ],
   providers: [
     StatusBar,

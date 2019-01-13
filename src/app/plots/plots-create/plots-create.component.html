@@ -1,0 +1,18 @@
+  <ion-card>
+    <ion-card-header>
+      Register Plot
+    </ion-card-header>
+    <form (submit)="onAddPlot()" #plotForm="ngForm">
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Plot Name:</ion-label>
+          <ion-input type="text" name="plotName" required ngModel #plotName="ngModel"></ion-input>
+        </ion-item>
+          <!-- <ion-button type="submit">Register</ion-button> -->
+          <button ion-button primary type="submit">Register</button>
+      </ion-card-content>
+    </form>
+  </ion-card>
+  
+  
+

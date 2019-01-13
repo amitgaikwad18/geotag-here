@@ -1,16 +1,15 @@
-import { Component, OnInit, OnDestroy, NgModule } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { GeoCoordsService } from '../services/geocoords.service';
 import { Geocoords } from '../model/geocoords.model';
-import { throwError } from 'rxjs';
-import { error } from 'util';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss']
 })
+
 
 export class HomePage implements OnInit {
 
@@ -53,7 +52,7 @@ export class HomePage implements OnInit {
     // console.log(this.coordinates.longitude);
   }
 
-  showMyCoordinates() {
+  whereAmI() {
 
     this.showmycoords = !this.showmycoords;
 
@@ -62,6 +61,5 @@ export class HomePage implements OnInit {
     console.log(this.coordinates.longitude);
 
   }
-
 
 }

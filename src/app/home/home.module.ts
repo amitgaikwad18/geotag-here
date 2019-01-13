@@ -5,13 +5,22 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
+import { PlotsCreateModule } from '../plots/plots-create/plots-create.component.module';
+import { PlotsListModule } from '../plots/plots-list/plots-list.component.module';
+
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([{ path: '', component: HomePage }])
+    PlotsCreateModule,
+    PlotsListModule,
+    RouterModule
+    .forChild([
+      { path: '', component: HomePage },
+      { path: 'plots', component: PlotsCreateModule}
+    ]),
   ],
-  declarations: [HomePage]
+  declarations: [HomePage],
 })
 export class HomePageModule {}

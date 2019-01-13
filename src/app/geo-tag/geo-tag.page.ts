@@ -51,7 +51,7 @@ export class GeoTagPage implements OnInit {
       container: 'mapid', // container id
       style: 'mapbox://styles/mapbox/streets-v9', // stylesheet location
       center: lnglat, // starting position [lng, lat]
-      zoom: 15 // starting zoom
+      zoom: 15, // starting zoom
     });
 
     this.map.addControl(new mapboxgl.NavigationControl());
@@ -62,6 +62,10 @@ export class GeoTagPage implements OnInit {
       },
       trackUserLocation: true
     }));
+
+    this.map.on('load', () => {
+      this.map.resize();
+    });
 
 
     // this.map = L.map('mapid').setView([this.coordinates.latitude, this.coordinates.longitude], 15);

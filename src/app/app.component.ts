@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.splashScreen.show();
     this.initializeApp();
   }
 
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit {
       this.splashScreen.hide();
       // this.initializeDB();
       this.initializeLocation();
+      this.splashScreen.hide();
     });
   }
 
