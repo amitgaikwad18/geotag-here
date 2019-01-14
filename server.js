@@ -19,7 +19,7 @@ app.use(cors());
  
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE, OPTIONS, PUT");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -64,9 +64,27 @@ app.delete('/api/plots/:id', (req, res, next) => {
     res.status(200).json({
       message: "Plot Deleted Successfully!",
     });
-  }
+  });
+});
 
-  )
+app.put('/api/plots/:id', (req, res, next) => {
+
+  Plot.replaceOne({ _id: req.params.id}, 
+    {
+      id: req.body.id,
+      plotName: req.body.plotName,
+      plotLatitude : req.body.plotLatitude,
+      plotLongitude : req.body.plotLongitude
+    })
+    .then(result => {
+      console.log(result);
+      res.status(200).json({
+        message: "From serverjs >>> Plot updated successfully"
+      })
+    })
+    .catch(error => {
+      console.log(error)
+    });
 });
 
 const onError = error => {

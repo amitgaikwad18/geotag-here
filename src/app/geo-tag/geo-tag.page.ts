@@ -8,6 +8,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { GeoCoordsService } from '../services/geocoords.service';
 import { Geocoords } from '../model/geocoords.model';
 import { environment } from '../../environments/environment.prod';
+import { PlotsService } from '../services/plots.service';
 
 // declare const H: any;
 
@@ -30,7 +31,8 @@ export class GeoTagPage implements OnInit {
 
   polygonLatLngs = [];
 
-  constructor(private geolocation: Geolocation, public geocoordsService: GeoCoordsService) {
+  constructor(private geolocation: Geolocation, public geocoordsService: GeoCoordsService,
+    public plotService: PlotsService) {
     mapboxgl.accessToken = environment.mapbox.accessToken;
   }
 
@@ -45,7 +47,7 @@ export class GeoTagPage implements OnInit {
 
    // mapboxgl.accessToken = 'pk.eyJ1IjoiYW1pdGdhaWt3YWQ4NSIsImEiOiJjanFzMDYwbHEwaHd4NDJsanIzZ2hqbDFyIn0.H4c917HglXZhvgSdrTjhZA';
 
-     let lnglat = new mapboxgl.LngLat(this.coordinates.longitude, this.coordinates.latitude);
+    let lnglat = new mapboxgl.LngLat(this.coordinates.longitude, this.coordinates.latitude); 
 
     this.map = new mapboxgl.Map({
       container: 'mapid', // container id
