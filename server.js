@@ -24,7 +24,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-mongoose.connect('mongodb+srv://meanuser:7v2XbhqPsWewtf9c@cluster0-wkekd.mongodb.net/test?retryWrites=true')
+mongoose.connect('mongodb+srv://meanuser:7v2XbhqPsWewtf9c@cluster0-wkekd.mongodb.net/geotag?retryWrites=true')
 .then(() => {
   console.log('Connected to MongoDB');
 })
@@ -34,32 +34,40 @@ mongoose.connect('mongodb+srv://meanuser:7v2XbhqPsWewtf9c@cluster0-wkekd.mongodb
 
 app.post('/api/plots', (req, res, next) => {
   const plot = new Plot({
-    plotName: req.body.title
+    plotName: req.body.plotName
   });
-  console.log(plot);
-  res.status(201).json({
-    message: 'Plot Added Successfully'
+  plot.save()
+  .then(newPlot => {
+    res.status(201).json({
+      message: 'Plot Added Successfully',
+      plotId: newPlot._id,
+    });
   });
 });
 
 app.get('/api/plots', (req, res, next) => {
 
-  const plots = [
-    {
-      id: "123123123",
-      plotName: "First Plot"
-    },
-    {
-      id: "3453453453450",
-      plotName: "Second Plot  "
-    }
-  ];
-
-  res.status(200).json({
-    message: "Plots Fetched Successfully!",
-    plots: plots
+  Plot.find()
+  .then(plots => {
+    console.log(plots);
+    res.status(200).json({
+      message: "Plots Fetched Successfully!",
+      plots: plots
+    });
   });
-}); 
+});
+
+app.delete('/api/plots/:id', (req, res, next) => {
+  Plot.deleteOne({ _id: req.params.id })
+  .then(result => {
+    console.log(result);
+    res.status(200).json({
+      message: "Plot Deleted Successfully!",
+    });
+  }
+
+  )
+});
 
 const onError = error => {
   if (error.syscall !== "listen") {

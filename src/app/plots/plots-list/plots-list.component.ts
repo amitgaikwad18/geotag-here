@@ -24,10 +24,12 @@ export class PlotsListComponent implements OnInit, OnDestroy {
 
   }
 
+  deletePlot(plotId: string) {
+    this.plotsService.deletePlot(plotId);
+  }
+
   ngOnDestroy() {
     this.plotsSub.unsubscribe();
   }
-
-
 
 }

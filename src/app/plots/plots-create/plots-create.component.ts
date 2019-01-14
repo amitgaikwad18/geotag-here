@@ -24,7 +24,7 @@ export class PlotsCreateComponent implements OnInit {
 
     console.log(this.plotName);
     this.plotsService.addPlot(this.plotName);
-    form.resetForm();
+    // form.resetForm();
   }
 
 }

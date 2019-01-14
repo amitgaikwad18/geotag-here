@@ -3,6 +3,9 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { GeoCoordsService } from '../services/geocoords.service';
 import { Geocoords } from '../model/geocoords.model';
+import { Subscription } from 'rxjs';
+import { Plot } from '../model/plot.model';
+import { PlotsService } from '../services/plots.service';
 
 @Component({
   selector: 'app-home',
@@ -50,16 +53,6 @@ export class HomePage implements OnInit {
     // this.coordinates = this.geocoordsservice.getCurrentCoordinates();
     // console.log(this.coordinates.latitude);
     // console.log(this.coordinates.longitude);
-  }
-
-  whereAmI() {
-
-    this.showmycoords = !this.showmycoords;
-
-    this.coordinates = this.geocoordsservice.getCurrentCoordinates();
-    console.log(this.coordinates.latitude);
-    console.log(this.coordinates.longitude);
-
   }
 
 }
