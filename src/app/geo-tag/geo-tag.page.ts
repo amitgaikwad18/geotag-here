@@ -9,6 +9,7 @@ import { GeoCoordsService } from '../services/geocoords.service';
 import { Geocoords } from '../model/geocoords.model';
 import { environment } from '../../environments/environment.prod';
 import { PlotsService } from '../services/plots.service';
+import { Events } from '@ionic/angular';
 
 // declare const H: any;
 
@@ -19,6 +20,7 @@ import { PlotsService } from '../services/plots.service';
 })
 
 export class GeoTagPage implements OnInit {
+
 
   platform: any;
 
@@ -32,11 +34,15 @@ export class GeoTagPage implements OnInit {
   polygonLatLngs = [];
 
   constructor(private geolocation: Geolocation, public geocoordsService: GeoCoordsService,
-    public plotService: PlotsService) {
+    public plotService: PlotsService, public events: Events) {
     mapboxgl.accessToken = environment.mapbox.accessToken;
   }
 
   ngOnInit() {
+
+    this.events.subscribe('add:plot', (plotId) => {
+      console.log(plotId);
+    });
 
     this.coordinates = this.geocoordsService.getCurrentCoordinates();
     console.log('Coordinates from Geotag >>> ' + this.coordinates.latitude.toPrecision(4));
@@ -47,7 +53,7 @@ export class GeoTagPage implements OnInit {
 
    // mapboxgl.accessToken = 'pk.eyJ1IjoiYW1pdGdhaWt3YWQ4NSIsImEiOiJjanFzMDYwbHEwaHd4NDJsanIzZ2hqbDFyIn0.H4c917HglXZhvgSdrTjhZA';
 
-    let lnglat = new mapboxgl.LngLat(this.coordinates.longitude, this.coordinates.latitude); 
+    let lnglat = new mapboxgl.LngLat(this.coordinates.longitude, this.coordinates.latitude);
 
     this.map = new mapboxgl.Map({
       container: 'mapid', // container id

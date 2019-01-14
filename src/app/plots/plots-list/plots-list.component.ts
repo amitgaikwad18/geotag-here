@@ -3,7 +3,7 @@ import { Plot } from '../../model/plot.model';
 import { Subscription } from 'rxjs';
 import { PlotsService } from '../../services/plots.service';
 
-import { IonTabs } from '@ionic/angular';
+import { IonTabs, Events } from '@ionic/angular';
 import { GeoCoordsService } from 'src/app/services/geocoords.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class PlotsListComponent implements OnInit, OnDestroy {
   private plotsSub: Subscription;
 
   constructor(public plotsService: PlotsService, private ionTabs: IonTabs,
-    public geoService: GeoCoordsService) { }
+    public geoService: GeoCoordsService, public events: Events) { }
 
   ngOnInit() {
     this.plotsService.getPlots();
@@ -36,7 +36,9 @@ export class PlotsListComponent implements OnInit, OnDestroy {
     this.plotsService.deletePlot(plotId);
   }
 
-  routeMap() {
+  onAddPlot(plotId: string) {
+
+    this.events.publish('add:plot', plotId);
     this.ionTabs.select('geo-tag');
   }
 
