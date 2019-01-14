@@ -7,7 +7,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { GeoCoordsService } from '../services/geocoords.service';
 import { Geocoords } from '../model/geocoords.model';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment.prod';
 
 // declare const H: any;
 
